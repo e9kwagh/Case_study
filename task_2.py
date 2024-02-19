@@ -1,12 +1,12 @@
-"""task_01"""
+"""task_02"""
+
 import csv
 import os
 from datetime import datetime
 
 
 def rtm():
-    """rtm
-    """
+    """rtm"""
     dir = os.path.dirname(os.path.abspath(__file__))
     Rtm = os.path.join(dir, "RTM_Prices_2022.csv")
 
@@ -17,8 +17,7 @@ def rtm():
 
 
 def dam():
-    """dam
-    """
+    """dam"""
     dir = os.path.dirname(os.path.abspath(__file__))
     Dam = os.path.join(dir, "DAM_Prices_2022.csv")
 
@@ -29,8 +28,7 @@ def dam():
 
 
 def solution():
-    """solution
-    """
+    """solution"""
     hb_north_rtm = rtm()
     hb_north_dam = dam()
 

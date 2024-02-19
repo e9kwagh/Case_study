@@ -32,8 +32,7 @@ def dam():
 
 
 def solution():
-    """solution
-    """
+    """solution"""
     hb_north_rtm = rtm()
     hb_north_dam = dam()
 
@@ -84,7 +83,7 @@ if __name__ == "__main__":
     # end_date =  datetime(2022, 1, 31, 23)
 
 # for i in range(0, len(hb_north_rtm), 4):
-#     
+#
 #
 
 # hb_north_rtm_hourly = [i for i in hb_north_rtm if int(i["Delivery Interval"]) == 1]
