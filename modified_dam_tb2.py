@@ -11,8 +11,8 @@ def extractor():
 
     with open(task, "r", encoding="utf-8-sig") as task:
         task_read = list(csv.DictReader(task))
-    return task_read
 
+    return task_read
 
 def filter(n):
     """filter"""
@@ -22,29 +22,66 @@ def filter(n):
         for row in task_data
         if row["date"].startswith(n)
     ]
+    li = [ i["dam"].strip()  for i in  dam_hour_list]
+    li = [float(item) for item in li]
+    print("li =", li)
+    
+    
+# def tdn_list():
+#     result= []
+#     dates = date()
+#     for i in dates : 
+#        result.append(filter(i))
+#     return result
 
-    tbn_list = []
-    for _ in range(0, 2):
-        max_entry = max(dam_hour_list, key=lambda x: float(x["dam"]))
-        min_entry = min(dam_hour_list, key=lambda x: float(x["dam"]))
-        tbn_list.append(max_entry)
-        tbn_list.append(min_entry)
-        dam_hour_list.remove(max_entry)
-        dam_hour_list.remove(min_entry)
 
-    max_dam = float(tbn_list[0]["dam"]) + float(tbn_list[2]["dam"])
-    min_dam = float(tbn_list[1]["dam"]) + float(tbn_list[3]["dam"])
-    result = round(max_dam - min_dam, 2)
-    return result
+    max_diff = 0
+    max_val = None
+    min_val = None
 
+    for i in range(1, len(li)):
+        min_price = min(li[:i])
+       
+        current_diff = li[i] - min_price
+        if current_diff > max_diff:
+            max_diff = current_diff
+            max_val = li[i]
+            min_val = min_price
+        print(max_val)
+    
+    li.remove(max_val)
+    li.remove(min_val)
+
+    return round(max_diff, 2)
+
+
+def modified_tbn(date):
+    ans=[]
+    for _ in range(2): 
+        val = filter(date)     
+        ans.append(val)
+        
+    return sum(ans)
+
+
+
+def date():
+    data = extractor()
+    val= set()
+    for i in data:
+        val.add(i["date"].split(" ")[0])
+    date= list(val)
+    date_list = sorted(date)
+    return date_list
 
 def tbn_revenue():
     """
     tbn_revenue
     """
-    data = extractor()
-    unique_dates = sorted(list(set(row["date"].split(" ")[0] for row in data)))
-    final_result = {i: filter(i) for i in unique_dates}
+    # data = extractor()
+    dates = date()
+
+    final_result = {date: modified_tbn(date) for date in dates}
 
     with open(
         "modified_dam_tb2.csv", "w", newline="", encoding="utf-8-sig"
@@ -59,6 +96,13 @@ def tbn_revenue():
             ]
         )
 
-
 if __name__ == "__main__":
     print(tbn_revenue())
+   
+    # data = filter("2022-01-01")
+    # print(modified_tbn(data))
+    # print(date())
+    # print(modified_tbn("2022-01-01") , " = modified_tbn")
+    # print(filter("2022-01-01"))
+    # print(tbn_revenue())
+    
