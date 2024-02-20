@@ -35,7 +35,7 @@ def tbn_revenue(data, n):
         sum_start += float(data[i]["dam"])
         sum_end += float(data[-(i + 1)]["dam"])
     return round(sum_start - sum_end, 2)
-
+    
 
 def solution_dam():
     """solution_dam"""
@@ -52,12 +52,12 @@ def dam_tb2():
     """solution_dam"""
     results = solution_dam()
     with open("dam_tb2.csv", "w", newline="", encoding="utf-8-sig") as csv_file:
-        fieldnames = ["date", "dam_price"]
+        fieldnames = ["date", "tb2"]
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(
             [
-                {"date": date, "dam_price": tb2_value}
+                {"date": date, "tb2": tb2_value}
                 for date, tb2_value in results.items()
             ]
         )

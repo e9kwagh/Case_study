@@ -52,12 +52,12 @@ def dam_tb2():
     """dam_tb2"""
     results = solution_dam()
     with open("rtm_tb2.csv", "w", newline="", encoding="utf-8-sig") as csv_file:
-        fieldnames = ["date", "rtm_price"]
+        fieldnames = ["date", "tb2"]
         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(
             [
-                {"date": date, "rtm_price": tb2_value}
+                {"date": date, "tb2": tb2_value}
                 for date, tb2_value in results.items()
             ]
         )
